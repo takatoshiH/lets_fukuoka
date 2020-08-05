@@ -58,7 +58,6 @@ function startRoulette() {
 function stopRoulette() {
     document.getElementById('start_btn').disabled = false;
     document.getElementById('answer').innerText = municipality['name'];
-    let incorrect =
     clearTimeout(intervalId);
 }
 
