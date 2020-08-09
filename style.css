@@ -1,0 +1,17 @@
+.answer {
+    width: 20%;
+    background-color: deepskyblue;
+    color: white;
+    height: 2rem;
+    border-radius: 5px;
+    box-shadow: 3px 3px cornflowerblue;
+    margin: 10px auto;
+}
+
+.answer:hover {
+    background-color: dodgerblue;
+}
+
+.answer:active {
+    box-shadow: 3px 3px white;
+}

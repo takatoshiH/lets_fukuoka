@@ -72,14 +72,36 @@ function startRoulette() {
 
 function stopRoulette() {
     document.getElementById('start_btn').disabled = false;
-    document.getElementById('answer_1').innerText = municipality['name'];
-    document.getElementById('answer_2').innerText = municipalities.length >= index + 1 ? municipalities[index + 1]['name']: municipalities[index - 1]['name'];
-    document.getElementById('answer_3').innerText = municipalities.length >= index + 2 ? municipalities[index + 2]['name']: municipalities[index - 2]['name'];
-    document.getElementById('answer_4').innerText = municipalities.length >= index + 3 ? municipalities[index + 3]['name']: municipalities[index - 3]['name'];
+    let answers = [
+        municipality['name'],
+        municipalities[Math.round( Math.random() * (municipalities.length - 1) )]['name'],
+        municipalities[Math.round( Math.random() * (municipalities.length - 1) )]['name'],
+        municipalities[Math.round( Math.random() * (municipalities.length - 1) )]['name'],
+    ];
+
+    answers.sort(function() { Math.random() - .5; });
+
+    document.getElementById('answer_1').innerText = answers[0];
+    document.getElementById('answer_2').innerText = answers[1];
+    document.getElementById('answer_3').innerText = answers[2];
+    document.getElementById('answer_4').innerText = answers[3];
 
     document.getElementById('answer_1').onclick = () => {
-        console.log('正解');
+        if (document.getElementById('answer_1').innerText === municipality['name']) console.log('正解');
     }
+
+    document.getElementById('answer_2').onclick = () => {
+        if (document.getElementById('answer_2').innerText === municipality['name']) console.log('正解');
+    }
+
+    document.getElementById('answer_3').onclick = () => {
+        if (document.getElementById('answer_3').innerText === municipality['name']) console.log('正解');
+    }
+
+    document.getElementById('answer_4').onclick = () => {
+        if (document.getElementById('answer_4').innerText === municipality['name']) console.log('正解');
+    }
+
     clearTimeout(intervalId);
 }
 
