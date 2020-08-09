@@ -60,7 +60,9 @@ function startRoulette() {
     if(is_active) return;
 
     is_active = true;
+    document.getElementById('start_btn').removeAttribute('class');
     document.getElementById('start_btn').setAttribute('class', 'start_btn_inactive');
+    document.getElementById('stop_btn').removeAttribute('class');
     document.getElementById('stop_btn').setAttribute('class', 'stop_btn_active');
 
     Array.from(document.getElementsByClassName('answer')).forEach(( answer ) =>  {
@@ -78,6 +80,11 @@ function startRoulette() {
 function stopRoulette() {
     if (!is_active) return;
 
+    document.getElementById('start_btn').removeAttribute('class');
+    document.getElementById('start_btn').setAttribute('class', 'start_btn_active');
+    document.getElementById('stop_btn').removeAttribute('class');
+    document.getElementById('stop_btn').setAttribute('class', 'stop_btn_inactive');
+
     is_active = false;
     document.getElementById('start_btn').disabled = false;
     let answers = [
@@ -94,32 +101,23 @@ function stopRoulette() {
     document.getElementById('answer_3').innerText = answers[2];
     document.getElementById('answer_4').innerText = answers[3];
 
-    document.getElementById('answer_1').onclick = () => {
-        if (document.getElementById('answer_1').innerText === municipality['name']) console.log('正解');
-    }
-
-    document.getElementById('answer_2').onclick = () => {
-        if (document.getElementById('answer_2').innerText === municipality['name']) console.log('正解');
-    }
-
-    document.getElementById('answer_3').onclick = () => {
-        if (document.getElementById('answer_3').innerText === municipality['name']) console.log('正解');
-    }
-
-    document.getElementById('answer_4').onclick = () => {
-        if (document.getElementById('answer_4').innerText === municipality['name']) console.log('正解');
-    }
-
+    Array.from(document.getElementsByClassName('answer')).forEach((answer) => {
+        answer.onclick = () => {
+            createPopup(answer.innerText);
+        }
+    })
     clearTimeout(intervalId);
-    createPopup();
 }
 
-function createPopup() {
+function createPopup(municipality_name) {
     document.getElementById('popup').style.display = 'block';
-    document.getElementById('popup_title').innerText = '正解';
+    document.getElementById('popup_title').innerText = municipality_name === municipality['name'] ? '正解' : '違います';
 }
 
 function closePopup() {
     document.getElementById('popup').style.display = 'none';
+    Array.from(document.getElementsByClassName('answer')).forEach((answer) => {
+        answer.innerText = '';
+    })
 }
 
