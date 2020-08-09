@@ -57,13 +57,16 @@ let municipality = municipalities[index];
 let is_active = false;
 
 function startRoulette() {
-    is_active = true;
-    document.getElementById('answer_1').innerText = '';
-    document.getElementById('answer_2').innerText = '';
-    document.getElementById('answer_3').innerText = '';
-    document.getElementById('answer_4').innerText = '';
+    if(is_active) return;
 
-    document.getElementById('start_btn').disabled = true;
+    is_active = true;
+    document.getElementById('start_btn').setAttribute('class', 'start_btn_inactive');
+    document.getElementById('stop_btn').setAttribute('class', 'stop_btn_active');
+
+    Array.from(document.getElementsByClassName('answer')).forEach(( answer ) =>  {
+        answer.innerText = '';
+    })
+
     intervalId = setInterval(() => {
         document.getElementById(municipality['id']).setAttribute('fill', 'white');
         index = Math.round( Math.random() * (municipalities.length - 1) );
@@ -73,6 +76,8 @@ function startRoulette() {
 }
 
 function stopRoulette() {
+    if (!is_active) return;
+
     is_active = false;
     document.getElementById('start_btn').disabled = false;
     let answers = [

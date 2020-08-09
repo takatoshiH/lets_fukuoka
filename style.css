@@ -44,15 +44,19 @@
     margin: 10px auto;
 }
 
-/*#stop_btn {*/
-/*    width: 20%;*/
-/*    background-color: deepskyblue;*/
-/*    color: white;*/
-/*    height: 2rem;*/
-/*    border-radius: 5px;*/
-/*    box-shadow: 3px 3px cornflowerblue;*/
-/*    margin: 10px auto;*/
-/*}*/
+.start_btn_inactive {
+    background-color: gray;
+    box-shadow: 3px 3px white;
+}
+
+.stop_btn_active {
+    background-color: deepskyblue;
+    color: white;
+    height: 2rem;
+    border-radius: 5px;
+    box-shadow: 3px 3px cornflowerblue;
+    margin: 10px auto;
+}
 
 #stop_btn {
     width: 20%;
@@ -60,7 +64,6 @@
     color: white;
     height: 2rem;
     border-radius: 5px;
-    /*    box-shadow: 3px 3px cornflowerblue;*/
     margin: 10px auto;
 }
 
