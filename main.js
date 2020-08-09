@@ -54,8 +54,10 @@ let municipalities = [
 let intervalId;
 let index = Math.round( Math.random() * (municipalities.length - 1) );
 let municipality = municipalities[index];
+let is_active = false;
 
 function startRoulette() {
+    is_active = true;
     document.getElementById('answer_1').innerText = '';
     document.getElementById('answer_2').innerText = '';
     document.getElementById('answer_3').innerText = '';
@@ -71,6 +73,7 @@ function startRoulette() {
 }
 
 function stopRoulette() {
+    is_active = false;
     document.getElementById('start_btn').disabled = false;
     let answers = [
         municipality['name'],
@@ -103,5 +106,15 @@ function stopRoulette() {
     }
 
     clearTimeout(intervalId);
+    createPopup();
+}
+
+function createPopup() {
+    document.getElementById('popup').style.display = 'block';
+    document.getElementById('popup_title').innerText = '正解';
+}
+
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
 }
 

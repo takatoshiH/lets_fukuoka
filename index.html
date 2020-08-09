@@ -6,21 +6,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1 style="text-align: center">Let's FUKUOKA</h1>
-<div style="text-align: center">
-    <button id='start_btn' onclick="startRoulette()">START</button>
-    <button id='stop_btn' onclick="stopRoulette()">STOP</button>
+<div id="popup">
+    <h1 id="popup_title">正解</h1>
+    <div id='close_popup' onclick="closePopup()">次へ</div>
+</div>
+<h1 class='title'>Let's FUKUOKA</h1>
+<div class='roulette'>
+    <div id='start_btn' onclick="startRoulette()">START</div>
+    <div id='stop_btn' onclick="stopRoulette()">STOP</div>
 </div>
 
-<div style="text-align: center;">
+<div class='answer_box'>
     <div class="option" id="answers">
-        <div class='answer' id='answer_1'>福岡市</div>
-        <div class='answer' id='answer_2'>福岡市</div>
-        <div class='answer' id='answer_3'>福岡市</div>
-        <div class='answer' id='answer_4'>福岡市</div>
+        <div class='answer' id='answer_1'></div>
+        <div class='answer' id='answer_2'></div>
+        <div class='answer' id='answer_3'></div>
+        <div class='answer' id='answer_4'></div>
     </div>
 </div>
-<div style="width: 30%; margin: 0 auto">
+<div class="map">
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
          viewBox="0 0 1683.778809 2383.936523" enable-background="new 0 0 1683.778809 2383.936523" xml:space="preserve">
 <g id="base">
