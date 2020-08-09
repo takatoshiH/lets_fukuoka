@@ -13,11 +13,9 @@
 
 .answer {
     width: 20%;
-    background-color: deepskyblue;
     color: white;
     height: 2rem;
     border-radius: 5px;
-    box-shadow: 3px 3px cornflowerblue;
     margin: 10px auto;
 }
 
@@ -26,6 +24,16 @@
 }
 
 .answer:active {
+    background-color: deepskyblue;
+}
+
+.answer_active {
+    box-shadow: 3px 3px cornflowerblue;
+    background-color: deepskyblue;
+}
+
+.answer_inactive {
+    background-color: grey;
     box-shadow: 3px 3px white;
 }
 

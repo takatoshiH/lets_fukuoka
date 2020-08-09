@@ -67,7 +67,12 @@ function startRoulette() {
 
     Array.from(document.getElementsByClassName('answer')).forEach(( answer ) =>  {
         answer.innerText = '';
-    })
+    });
+
+    Array.from(document.getElementsByClassName('answer')).forEach((answer) => {
+        answer.classList.remove('answer_active');
+        answer.classList.add('answer_inactive');
+    });
 
     intervalId = setInterval(() => {
         document.getElementById(municipality['id']).setAttribute('fill', 'white');
@@ -84,6 +89,12 @@ function stopRoulette() {
     document.getElementById('start_btn').setAttribute('class', 'start_btn_active');
     document.getElementById('stop_btn').removeAttribute('class');
     document.getElementById('stop_btn').setAttribute('class', 'stop_btn_inactive');
+
+    Array.from(document.getElementsByClassName('answer')).forEach((answer) => {
+        answer.classList.remove('answer_inactive');
+        answer.classList.add('answer_active');
+    });
+
 
     is_active = false;
     document.getElementById('start_btn').disabled = false;
