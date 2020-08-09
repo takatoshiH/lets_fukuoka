@@ -52,22 +52,34 @@ let municipalities = [
 ];
 
 let intervalId;
-let municipality = municipalities[Math.round( Math.random() * (municipalities.length - 1) )];
+let index = Math.round( Math.random() * (municipalities.length - 1) );
+let municipality = municipalities[index];
 
 function startRoulette() {
-    document.getElementById('answer').innerText = '';
+    document.getElementById('answer_1').innerText = '';
+    document.getElementById('answer_2').innerText = '';
+    document.getElementById('answer_3').innerText = '';
+    document.getElementById('answer_4').innerText = '';
+
     document.getElementById('start_btn').disabled = true;
     intervalId = setInterval(() => {
-        document.getElementById(municipality['id']).setAttribute('fill', '#FFFFFF');
-        municipality = municipalities[Math.round( Math.random() * (municipalities.length - 1) )];
+        document.getElementById(municipality['id']).setAttribute('fill', 'white');
+        index = Math.round( Math.random() * (municipalities.length - 1) );
+        municipality = municipalities[index];
         document.getElementById(municipality['id']).setAttribute('fill', 'red');
-        console.log(municipality);
     }, 100);
 }
 
 function stopRoulette() {
     document.getElementById('start_btn').disabled = false;
-    document.getElementById('answer').innerText = municipality['name'];
+    document.getElementById('answer_1').innerText = municipality['name'];
+    document.getElementById('answer_2').innerText = municipalities.length >= index + 1 ? municipalities[index + 1]['name']: municipalities[index - 1]['name'];
+    document.getElementById('answer_3').innerText = municipalities.length >= index + 2 ? municipalities[index + 2]['name']: municipalities[index - 2]['name'];
+    document.getElementById('answer_4').innerText = municipalities.length >= index + 3 ? municipalities[index + 3]['name']: municipalities[index - 3]['name'];
+
+    document.getElementById('answer_1').onclick = () => {
+        console.log('正解');
+    }
     clearTimeout(intervalId);
 }
 
