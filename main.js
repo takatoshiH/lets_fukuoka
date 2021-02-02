@@ -58,6 +58,7 @@ let is_active = false;
 
 function startRoulette() {
     if(is_active) return;
+    closePopup();
 
     is_active = true;
     document.getElementById('start_btn').removeAttribute('class');
@@ -96,6 +97,7 @@ function stopRoulette() {
     });
 
 
+    // todo 答えが重複する問題の解決
     is_active = false;
     document.getElementById('start_btn').disabled = false;
     let answers = [
@@ -120,11 +122,13 @@ function stopRoulette() {
     clearTimeout(intervalId);
 }
 
+// 回答のPOPUP表示
 function createPopup(municipality_name) {
     document.getElementById('popup').style.display = 'block';
     document.getElementById('popup_title').innerText = municipality_name === municipality['name'] ? '正解' : '違います';
 }
 
+// 回答のPOPUP停止
 function closePopup() {
     document.getElementById('popup').style.display = 'none';
     Array.from(document.getElementsByClassName('answer')).forEach((answer) => {
