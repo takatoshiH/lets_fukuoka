@@ -102,9 +102,9 @@ function stopRoulette() {
     document.getElementById('start_btn').disabled = false;
     let answers = [
         municipality['name'],
-        municipalities[Math.round( Math.random() * (municipalities.length - 1) )]['name'],
-        municipalities[Math.round( Math.random() * (municipalities.length - 1) )]['name'],
-        municipalities[Math.round( Math.random() * (municipalities.length - 1) )]['name'],
+        municipalities[makeIncorrectIndex(index) ]['name'],
+        municipalities[makeIncorrectIndex(index) ]['name'],
+        municipalities[makeIncorrectIndex(index) ]['name'],
     ];
 
     answers.sort(function() { Math.random() - .5; });
@@ -118,7 +118,8 @@ function stopRoulette() {
         answer.onclick = () => {
             createPopup(answer.innerText);
         }
-    })
+    });
+
     clearTimeout(intervalId);
 }
 
@@ -126,6 +127,11 @@ function stopRoulette() {
 function createPopup(municipality_name) {
     document.getElementById('popup').style.display = 'block';
     document.getElementById('popup_title').innerText = municipality_name === municipality['name'] ? '正解' : '違います';
+
+    Array.from(document.getElementsByClassName('answer')).forEach((answer) => {
+        answer.classList.remove('answer_active');
+        answer.classList.add('answer_inactive');
+    });
 }
 
 // 回答のPOPUP停止
@@ -134,5 +140,16 @@ function closePopup() {
     Array.from(document.getElementsByClassName('answer')).forEach((answer) => {
         answer.innerText = '';
     })
+}
+
+function makeIncorrectIndex(index) {
+    let incorectIndex = Math.random() * (municipalities.length - 1);
+
+    while(index == incorectIndex) {
+        incorectIndex = Math.random() * (municipalities.length - 1);
+    }
+
+    return Math.round(incorectIndex);
+
 }
 

@@ -19,11 +19,11 @@
     margin: 10px auto;
 }
 
-.answer:hover {
+.answer_active:hover {
     background-color: dodgerblue;
 }
 
-.answer:active {
+.answer_active:active {
     background-color: deepskyblue;
 }
 
