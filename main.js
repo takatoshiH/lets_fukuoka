@@ -56,6 +56,10 @@ let index = Math.round( Math.random() * (municipalities.length - 1) );
 let municipality = municipalities[index];
 let is_active = false;
 
+if(!confirm('Do you like Fukuoka?')) {
+    window.location.href = 'https://www.google.co.jp/';
+}
+
 function startRoulette() {
     if(is_active) return;
     closePopup();
