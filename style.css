@@ -86,7 +86,7 @@
     height: 20%;
     border-radius: 5px;
     background-color: antiquewhite;
-    display: none;
+    text-align: center
 }
 
 #popup_title {
@@ -100,6 +100,10 @@
     width: 20%;
     background-color: burlywood;
     border-radius: 3px;
+}
+
+#close_popup:hover {
+    cursor: pointer;
 }
 
 .button:hover {

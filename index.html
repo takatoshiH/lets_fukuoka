@@ -7,31 +7,34 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 </head>
 <body>
-<div id="popup" style="text-align: center">
-    <h1 id="popup_title">正解</h1>
-    <div id="municipality_content"></div>
-    <a id="municipality_url" target='_blank'>市町村のサイトはこちら</a>
-    <div id='close_popup' onclick="closePopup()">次へ</div>
-</div>
-<h1 class='title'>We are FUKUOKA</h1>
 <div id="app">
+    <div id="popup" v-if="popupVisible">
+        <h1 id="popup_title">正解</h1>
+        <div id="municipality_content"></div>
+        <a id="municipality_url" target='_blank'>市町村のサイトはこちら</a>
+        <div id='close_popup' @click="closePopUp">次へ</div>
+    </div>
+    <h1 class='title'>We are FUKUOKA</h1>
+
     <div class='roulette'>
         <div id='start_btn'
              :class="{ btn_inactive: rouletteActive, btn_active: !rouletteActive }"
-             @click="changeRouletteActive"
-             class='button'>START</div>
+             @click="startRoulette"
+             class='button'>START
+        </div>
         <div id='stop_btn'
              :class="{ btn_inactive: !rouletteActive, btn_active: rouletteActive }"
-             @click="changeRouletteInactive"
-             class='button'>STOP</div>
+             @click="stopRoulette"
+             class='button'>STOP
+        </div>
     </div>
 
     <div class='answer_box'>
         <div class="option" id="answers">
-            <div class='answer answer_inactive' id='answer_1'></div>
-            <div class='answer answer_inactive' id='answer_2'></div>
-            <div class='answer answer_inactive' id='answer_3'></div>
-            <div class='answer answer_inactive' id='answer_4'></div>
+            <div class='answer' :class=""id='answer_1'></div>
+            <div class='answer' id='answer_2'></div>
+            <div class='answer' id='answer_3'></div>
+            <div class='answer' id='answer_4'></div>
         </div>
     </div>
 </div>
