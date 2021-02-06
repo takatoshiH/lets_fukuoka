@@ -31,10 +31,10 @@
 
     <div class='answer_box'>
         <div class="option" id="answers">
-            <div class='answer' :class=""id='answer_1'></div>
+            <div class='answer' :class="{answer_active: waitingAnswer, answer_inactive: !waitingAnswer}" id='answer_1'></div>
             <div class='answer' id='answer_2'></div>
             <div class='answer' id='answer_3'></div>
-            <div class='answer' id='answer_4'></div>
+            <div class='answer ' id='answer_4'></div>
         </div>
     </div>
 </div>

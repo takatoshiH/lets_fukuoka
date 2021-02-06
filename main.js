@@ -27,10 +27,14 @@ let app3 = new Vue({
 
         }, stopRoulette: function () {
             this.changeRouletteInactive();
-            this.popupVisible = true;
+            this.waitingAnswer = true;
         },
         closePopUp: function () {
             this.popupVisible = false;
+        },
+        answer: function () {
+            this.waitingAnswer = false;
+            this.popupVisible = true;
         }
 
     },
