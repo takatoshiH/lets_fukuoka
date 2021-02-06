@@ -38,7 +38,7 @@
 }
 
 .map {
-    width: 30%;
+    width: 35%;
     margin: 0 auto;
 }
 
@@ -50,12 +50,12 @@
     margin: 10px auto;
 }
 
-.start_btn_active {
+.btn_active {
     background-color: deepskyblue;
     box-shadow: 3px 3px cornflowerblue;
 }
 
-.start_btn_inactive {
+.btn_inactive {
     background-color: gray;
     box-shadow: 3px 3px white;
 }
@@ -68,12 +68,12 @@
     border-radius: 5px;
 }
 
-.stop_btn_active {
+.btn_active {
     background-color: deepskyblue;
     box-shadow: 3px 3px cornflowerblue;
 }
 
-.stop_btn_inactive {
+.btn_inactive {
     background-color: grey;
     box-shadow: 3px 3px white;
 }
