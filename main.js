@@ -1,40 +1,42 @@
 let app3 = new Vue({
     el: '#app',
     data: {
-        rouletteActive: false,
-        popupVisible: false,
-        waitingAnswer: false,
+        readyToStart: true, // スタート前の状態
+        rouletteActive: false, // ルーレットが回っているか
+        waitingAnswer: false, // 回答待ちの状態か
+        popupVisible: false, // POPUPは表示されているか
         answerIndex: 0,
         intervalId: 0,
     },
     methods: {
-        changeRouletteActive: function () {
-            this.rouletteActive = true;
-        },
-        changeRouletteInactive: function () {
-            this.rouletteActive = false;
-        },
+        // スタートボタン
         startRoulette: function () {
-            this.changeRouletteActive();
-            this.popupVisible = false;
-
-            // this.intervalId = setInterval(() => {
-            //     document.getElementById(municipality['id']).setAttribute('fill', 'white');
-            //     index = Math.round(Math.random() * (municipalities.length - 1));
-            //     municipality = municipalities[index];
-            //     document.getElementById(municipality['id']).setAttribute('fill', 'red');
-            // }, 100);
-
-        }, stopRoulette: function () {
-            this.changeRouletteInactive();
-            this.waitingAnswer = true;
+            if(this.readyToStart) {
+                this.readyToStart = false;
+                this.rouletteActive = true;
+            }
         },
+        // 停止ボタン
+        stopRoulette: function () {
+            if(this.rouletteActive) {
+                this.rouletteActive = false;
+                this.waitingAnswer = true;
+            }
+        },
+
+        // POPUP内の次へボタン
         closePopUp: function () {
             this.popupVisible = false;
+            this.readyToStart = true;
         },
+
+        // 回答ボタン
         answer: function () {
-            this.waitingAnswer = false;
-            this.popupVisible = true;
+            if(this.waitingAnswer) {
+                this.rouletteActive = false;
+                this.waitingAnswer = false;
+                this.popupVisible = true;
+            }
         }
 
     },

@@ -18,7 +18,7 @@
 
     <div class='roulette'>
         <div id='start_btn'
-             :class="{ btn_inactive: rouletteActive, btn_active: !rouletteActive }"
+             :class="{ btn_active: readyToStart, btn_inactive: !readyToStart }"
              @click="startRoulette"
              class='button'>START
         </div>
@@ -31,10 +31,22 @@
 
     <div class='answer_box'>
         <div class="option" id="answers">
-            <div class='answer' :class="{answer_active: waitingAnswer, answer_inactive: !waitingAnswer}" id='answer_1'></div>
-            <div class='answer' id='answer_2'></div>
-            <div class='answer' id='answer_3'></div>
-            <div class='answer ' id='answer_4'></div>
+            <div class='answer'
+                 :class="{answer_active: waitingAnswer, answer_inactive: !waitingAnswer}"
+                 id='answer_1'
+                 @click="answer"></div>
+            <div class='answer'
+                 :class="{answer_active: waitingAnswer, answer_inactive: !waitingAnswer}"
+                 id='answer_2'
+                 @click="answer"></div>
+            <div class='answer'
+                 :class="{answer_active: waitingAnswer, answer_inactive: !waitingAnswer}"
+                 id='answer_3'
+                 @click="answer"></div>
+            <div class='answer'
+                 :class="{answer_active: waitingAnswer, answer_inactive: !waitingAnswer}"
+                 id='answer_4'
+                 @click="answer"></div>
         </div>
     </div>
 </div>
