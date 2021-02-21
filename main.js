@@ -52,7 +52,7 @@ let municipalities = [
 ];
 
 
-let app3 = new Vue({
+let app = new Vue({
     el: '#app',
     data: {
         readyToStart: true, // スタート前の状態
@@ -61,7 +61,8 @@ let app3 = new Vue({
         popupVisible: false, // POPUPは表示されているか
         answerIndex: 0,
         intervalId: 0,
-        // municipalities: municipalities,
+        municipality: municipalities[0],
+        answers: [],
     },
     methods: {
         // スタートボタン
@@ -78,6 +79,7 @@ let app3 = new Vue({
                 this.rouletteActive = false;
                 this.waitingAnswer = true;
                 clearTimeout(this.intervalId);
+                this.createAnswers();
             }
         },
 
@@ -99,14 +101,26 @@ let app3 = new Vue({
         // 市町村ルーレット
         roulette: function () {
             this.intervalId = setInterval(() => {
-                document.getElementById(municipality['id']).setAttribute('fill', 'white');
-                let index  = Math.round(Math.random() * (municipalities.length - 1));
-                let municipality = municipalities[index];
-                document.getElementById(municipality['id']).setAttribute('fill', 'red');
+                document.getElementById(this.municipality['id']).setAttribute('fill', 'white');
+                this.answerIndex  = Math.round(Math.random() * (municipalities.length - 1));
+                this.municipality = municipalities[this.answerIndex];
+                document.getElementById(this.municipality['id']).setAttribute('fill', 'red');
             }, 100);
+        },
 
+        createAnswers: function () {
+            this.answers.push(Math.round(Math.random() * (municipalities.length - 1)));
+            this.answers.push(Math.round(Math.random() * (municipalities.length - 1)));
+            this.answers.push(Math.round(Math.random() * (municipalities.length - 1)));
+            this.answers.push(this.answerIndex);
+
+            for ( let index of this.answers) {
+                document.getElementById('answer_1').innerText = municipalities[index]['name'];
+                document.getElementById('answer_2').innerText = municipalities[index]['name'];
+                document.getElementById('answer_3').innerText = municipalities[index]['name'];
+                document.getElementById('answer_4').innerText = municipalities[index]['name'];
+            }
         }
-
     },
 
 });
