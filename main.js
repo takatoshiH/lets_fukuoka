@@ -87,6 +87,11 @@ let app = new Vue({
         closePopUp: function () {
             this.popupVisible = false;
             this.readyToStart = true;
+            Array.from(document.getElementsByClassName('answer')).forEach(function (municipality) {
+                municipality.innerHTML = null;
+            });
+
+
         },
 
         // 回答ボタン
@@ -114,11 +119,10 @@ let app = new Vue({
             this.answers.push(Math.round(Math.random() * (municipalities.length - 1)));
             this.answers.push(this.answerIndex);
 
+            let answers  = 1;
             for ( let index of this.answers) {
-                document.getElementById('answer_1').innerText = municipalities[index]['name'];
-                document.getElementById('answer_2').innerText = municipalities[index]['name'];
-                document.getElementById('answer_3').innerText = municipalities[index]['name'];
-                document.getElementById('answer_4').innerText = municipalities[index]['name'];
+                document.getElementById(`answer_${answers}`).innerText = municipalities[index]['name'];
+                answers++;
             }
         }
     },
