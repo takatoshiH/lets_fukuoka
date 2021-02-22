@@ -124,12 +124,11 @@ let app = new Vue({
                 console.log(this.answerIndex);
                 console.log(index);
                 console.log(this.answerIndex == index);
-                if(this.answerIndex == index){
+                if (this.answerIndex == index) {
                     console.log(document.getElementById(`answer_${answers}`));
                     document.getElementById(`answer_${answers}`).classList.add('active');
                     console.log(document.getElementById(`answer_${answers}`));
                 }
-
                 answers++;
             }
         },
