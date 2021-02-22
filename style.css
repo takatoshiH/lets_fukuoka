@@ -91,7 +91,7 @@
 
 #popup_title {
     text-align: center;
-    color: red;
+    color: #ea5504;
 }
 
 #close_popup {
@@ -110,3 +110,8 @@
     cursor: pointer;
 }
 
+.option {
+    display: flex;
+    width: 50%;
+    margin: 0px auto;
+}
