@@ -91,7 +91,6 @@ let app = new Vue({
                 municipality.innerHTML = null;
             });
 
-
         },
 
         // 回答ボタン
@@ -101,6 +100,10 @@ let app = new Vue({
                 this.waitingAnswer = false;
                 this.popupVisible = true;
             }
+
+            this.answers = [];
+            // 回答の正誤判定
+
         },
 
         // 市町村ルーレット
@@ -114,17 +117,37 @@ let app = new Vue({
         },
 
         createAnswers: function () {
-            this.answers.push(Math.round(Math.random() * (municipalities.length - 1)));
-            this.answers.push(Math.round(Math.random() * (municipalities.length - 1)));
-            this.answers.push(Math.round(Math.random() * (municipalities.length - 1)));
-            this.answers.push(this.answerIndex);
-
+            this.pushAnswers();
             let answers = 1;
             for (let index of this.answers) {
                 document.getElementById(`answer_${answers}`).innerText = municipalities[index]['name'];
+                console.log(this.answerIndex);
+                console.log(index);
+                console.log(this.answerIndex == index);
+                if(this.answerIndex == index){
+                    console.log(document.getElementById(`answer_${answers}`));
+                    document.getElementById(`answer_${answers}`).classList.add('active');
+                    console.log(document.getElementById(`answer_${answers}`));
+                }
+
                 answers++;
             }
+        },
+
+        pushAnswers: function () {
+            while (this.answers.length < 3) {
+                let index = Math.round(Math.random() * (municipalities.length - 1));
+                if (!this.answers.includes(index)) this.answers.push(index);
+            }
+
+            this.answers.push(this.answerIndex);
+            let rand = Math.round(Math.random() * 3);
+            this.answers.last = this.answers[rand];
+            this.answers[rand] = this.answerIndex;
+        },
+
+        judgeAnswer: function () {
+
         }
     },
-
 });
