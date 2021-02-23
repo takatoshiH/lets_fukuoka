@@ -1,4 +1,4 @@
-let municipalities = [
+const municipalities = [
     {'id': '_x40_40401', 'name': '小竹町', url: 'https://qiita.com/Takatoshi_Hiki'},
     {'id': '_x40_40108', 'name': '北九州市八幡東区', url: 'https://qiita.com/Takatoshi_Hiki'},
     {'id': '_x40_40109', 'name': '北九州市八幡西区', url: 'https://qiita.com/Takatoshi_Hiki'},
@@ -65,25 +65,33 @@ let app = new Vue({
         answers: [],
     },
     methods: {
-        // スタートボタン
+        // スタートボタンをクリック
         startRoulette: function () {
-            if (this.readyToStart) {
-                this.readyToStart = false;
-                this.rouletteActive = true;
-                this.roulette();
-            }
+            if (!this.readyToStart) return;
+
+            this.readyToStart = false;
+            this.rouletteActive = true;
+
+            // ルーレットの開始
+            this.roulette();
+
         },
-        // 停止ボタン
+        // 停止ボタンをクリック
         stopRoulette: function () {
-            if (this.rouletteActive) {
-                this.rouletteActive = false;
-                this.waitingAnswer = true;
-                clearTimeout(this.intervalId);
-                this.createAnswers();
-            }
+            if (!this.rouletteActive) return;
+
+            this.rouletteActive = false;
+            this.waitingAnswer = true;
+
+            //タイマーの停止
+            clearTimeout(this.intervalId);
+
+            // 回答の作成
+            this.createAnswers();
+
         },
 
-        // POPUP内の次へボタン
+        // POPUP内の次へボタンをクリック
         closePopUp: function () {
             this.popupVisible = false;
             this.readyToStart = true;
@@ -93,60 +101,60 @@ let app = new Vue({
 
         },
 
-        // 回答ボタン
+        // 回答ボタンをクリック
         answer: function () {
-            if (this.waitingAnswer) {
-                this.rouletteActive = false;
-                this.waitingAnswer = false;
-                this.popupVisible = true;
-            }
+            if (!this.waitingAnswer) return;
 
+            this.rouletteActive = false;
+            this.waitingAnswer = false;
+            this.popupVisible = true;
+
+
+            // 回答配列の初期化
             this.answers = [];
+
             // 回答の正誤判定
+            let judge = true;
+
+            // 正誤を画面に表示
+            document.getElementById('popup_title').innerText = judge ? '正解！' : '不正解!';
 
         },
 
         // 市町村ルーレット
         roulette: function () {
             this.intervalId = setInterval(() => {
-                document.getElementById(this.municipality['id']).setAttribute('fill', 'white');
+                let municipality = document.getElementById(this.municipality['id']);
+                municipality.setAttribute('fill', 'white');
                 this.answerIndex = Math.round(Math.random() * (municipalities.length - 1));
                 this.municipality = municipalities[this.answerIndex];
-                document.getElementById(this.municipality['id']).setAttribute('fill', 'red');
+                municipality.setAttribute('fill', 'red');
             }, 100);
         },
 
         createAnswers: function () {
-            this.pushAnswers();
-            let answers = 1;
-            for (let index of this.answers) {
-                document.getElementById(`answer_${answers}`).innerText = municipalities[index]['name'];
-                console.log(this.answerIndex);
-                console.log(index);
-                console.log(this.answerIndex == index);
-                if (this.answerIndex == index) {
-                    console.log(document.getElementById(`answer_${answers}`));
-                    document.getElementById(`answer_${answers}`).classList.add('active');
-                    console.log(document.getElementById(`answer_${answers}`));
-                }
-                answers++;
-            }
-        },
-
-        pushAnswers: function () {
+            // 不正解の作成
             while (this.answers.length < 3) {
                 let index = Math.round(Math.random() * (municipalities.length - 1));
                 if (!this.answers.includes(index)) this.answers.push(index);
             }
 
+            // 正解の作成
             this.answers.push(this.answerIndex);
+
+            // 配列の簡易的なシャッフル
             let rand = Math.round(Math.random() * 3);
             this.answers.last = this.answers[rand];
             this.answers[rand] = this.answerIndex;
+
+            // 回答をdomに反映
+            let answers = 1;
+
+            for (let index of this.answers) {
+                document.getElementById(`answer_${answers}`).innerText = municipalities[index]['name'];
+                if (this.answerIndex == index) document.getElementById(`answer_${answers}`).classList.add('correct');
+                answers++;
+            }
         },
-
-        judgeAnswer: function () {
-
-        }
     },
 });
