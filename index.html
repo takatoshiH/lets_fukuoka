@@ -12,7 +12,7 @@
     <div id="popup" v-show="popupVisible">
         <h1 id="popup_title"></h1>
         <div id="municipality_content"></div>
-        <a id="municipality_url" target='_blank'>市町村のサイトはこちら</a>
+        <a id="municipality_url" target='_blank'>市町村のサイトはこちら</a><br>
         <div id='close_popup' @click="closePopUp">次へ</div>
     </div>
     <h1 class='title'>Let's FUKUOKA</h1>
@@ -35,19 +35,19 @@
             <div class='answer'
                  :class="{answer_active: waitingAnswer, answer_inactive: !waitingAnswer}"
                  id='answer_1'
-                 @click="answer"></div>
+                 @click="answer($event)"></div>
             <div class='answer'
                  :class="{answer_active: waitingAnswer, answer_inactive: !waitingAnswer}"
                  id='answer_2'
-                 @click="answer"></div>
+                 @click="answer($event)"></div>
             <div class='answer'
                  :class="{answer_active: waitingAnswer, answer_inactive: !waitingAnswer}"
                  id='answer_3'
-                 @click="answer"></div>
+                 @click="answer($event)"></div>
             <div class='answer'
                  :class="{answer_active: waitingAnswer, answer_inactive: !waitingAnswer}"
                  id='answer_4'
-                 @click="answer"></div>
+                 @click="answer($event)"></div>
         </div>
     </div>
 </div>

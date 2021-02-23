@@ -95,14 +95,19 @@ let app = new Vue({
         closePopUp: function () {
             this.popupVisible = false;
             this.readyToStart = true;
+
+            // 画面的な回答の初期化
             Array.from(document.getElementsByClassName('answer')).forEach(function (municipality) {
                 municipality.innerHTML = null;
             });
 
+            // 地図上の回答の初期化
+            document.getElementById(this.municipality['id']).setAttribute('fill', 'white');
+
         },
 
         // 回答ボタンをクリック
-        answer: function () {
+        answer: function (event) {
             if (!this.waitingAnswer) return;
 
             this.rouletteActive = false;
@@ -114,21 +119,21 @@ let app = new Vue({
             this.answers = [];
 
             // 回答の正誤判定
-            let judge = true;
+            const judge = event.target.hasAttribute('answer');
 
             // 正誤を画面に表示
             document.getElementById('popup_title').innerText = judge ? '正解！' : '不正解!';
+            document.getElementById('municipality_url').setAttribute('href', this.municipality['url']);
 
         },
 
         // 市町村ルーレット
         roulette: function () {
             this.intervalId = setInterval(() => {
-                let municipality = document.getElementById(this.municipality['id']);
-                municipality.setAttribute('fill', 'white');
+                document.getElementById(this.municipality['id']).setAttribute('fill', 'white');
                 this.answerIndex = Math.round(Math.random() * (municipalities.length - 1));
                 this.municipality = municipalities[this.answerIndex];
-                municipality.setAttribute('fill', 'red');
+                document.getElementById(this.municipality['id']).setAttribute('fill', '#ea5504');
             }, 100);
         },
 
@@ -152,7 +157,9 @@ let app = new Vue({
 
             for (let index of this.answers) {
                 document.getElementById(`answer_${answers}`).innerText = municipalities[index]['name'];
-                if (this.answerIndex == index) document.getElementById(`answer_${answers}`).classList.add('correct');
+                if (this.answerIndex === index) {
+                    document.getElementById(`answer_${answers}`).setAttribute('answer', 'correct');
+                }
                 answers++;
             }
         },
