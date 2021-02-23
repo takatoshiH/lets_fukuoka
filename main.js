@@ -51,7 +51,6 @@ const municipalities = [
     {'id': '_x40_40105', 'name': '北九州市戸畑区', url: 'https://qiita.com/Takatoshi_Hiki'},
 ];
 
-
 let app = new Vue({
     el: '#app',
     data: {
@@ -114,7 +113,6 @@ let app = new Vue({
             this.waitingAnswer = false;
             this.popupVisible = true;
 
-
             // 回答配列の初期化
             this.answers = [];
 
@@ -124,7 +122,12 @@ let app = new Vue({
             // 正誤を画面に表示
             document.getElementById('popup_title').innerText = judge ? '正解！' : '不正解!';
             document.getElementById('municipality_url').setAttribute('href', this.municipality['url']);
+            if(!judge) document.getElementById('municipality_content').innerText = `正解は${this.municipality['name']}`;
 
+            // 正解属性の削除
+            Array.from(document.getElementsByClassName('answer')).forEach(function (municipality) {
+                municipality.removeAttribute('answer');
+            });
         },
 
         // 市町村ルーレット
