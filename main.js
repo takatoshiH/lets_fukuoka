@@ -1,7 +1,17 @@
 const municipalities = [
     {'id': '_x40_40401', 'name': '小竹町', url: 'https://town.kotake.lg.jp/', comment: ''},
-    {'id': '_x40_40108', 'name': '北九州市八幡東区', url: 'https://www.city.kitakyushu.lg.jp/yahatahigashi/index.html', comment: ''},
-    {'id': '_x40_40109', 'name': '北九州市八幡西区', url: 'https://www.city.kitakyushu.lg.jp/yahatanishi/index.html', comment: ''},
+    {
+        'id': '_x40_40108',
+        'name': '北九州市八幡東区',
+        url: 'https://www.city.kitakyushu.lg.jp/yahatahigashi/index.html',
+        comment: ''
+    },
+    {
+        'id': '_x40_40109',
+        'name': '北九州市八幡西区',
+        url: 'https://www.city.kitakyushu.lg.jp/yahatanishi/index.html',
+        comment: ''
+    },
     {'id': '_x40_40101', 'name': '北九州市門司区', url: 'https://www.city.kitakyushu.lg.jp/moji/index.html', comment: ''},
     {'id': '_x40_40213', 'name': '行橋市', url: 'http://www.city.yukuhashi.fukuoka.jp/', comment: ''},
     {'id': '_x40_40381', 'name': '芦屋町', url: 'https://www.town.ashiya.lg.jp/', comment: ''},
@@ -24,7 +34,12 @@ const municipalities = [
     {'id': '_x40_40383', 'name': '岡垣町', url: 'http://www.town.okagaki.lg.jp/', comment: ''},
     {'id': '_x40_40384', 'name': '遠賀町', url: 'http://www.town.onga.lg.jp/', comment: ''},
     {'id': '_x40_40215', 'name': '中間市', url: 'http://www.city.nakama.lg.jp/', comment: ''},
-    {'id': '_x40_40107', 'name': '北九州市小倉南区', url: 'https://www.city.kitakyushu.lg.jp/kokuraminami/index.html', comment: ''},
+    {
+        'id': '_x40_40107',
+        'name': '北九州市小倉南区',
+        url: 'https://www.city.kitakyushu.lg.jp/kokuraminami/index.html',
+        comment: ''
+    },
     {'id': '_x40_40621', 'name': '苅田町', url: 'https://www.town.kanda.lg.jp/', comment: ''},
     {'id': '_x40_40223', 'name': '古賀市', url: 'https://www.city.koga.fukuoka.jp/', comment: ''},
     {'id': '_x40_40342', 'name': '篠栗町', url: 'https://www.town.sasaguri.fukuoka.jp/', comment: ''},
@@ -121,7 +136,7 @@ let app = new Vue({
             // 正誤を画面に表示
             document.getElementById('popup_title').innerText = judge ? '正解！' : '不正解!';
             document.getElementById('municipality_url').setAttribute('href', this.municipality['url']);
-            if(!judge) document.getElementById('municipality_content').innerText = `正解は${this.municipality['name']}`;
+            if (!judge) document.getElementById('municipality_content').innerText = `正解は${this.municipality['name']}`;
 
             // 正解属性の削除
             Array.from(document.getElementsByClassName('answer')).forEach(function (municipality) {
@@ -143,16 +158,15 @@ let app = new Vue({
             // 不正解の作成
             while (this.answers.length < 3) {
                 let index = Math.round(Math.random() * (municipalities.length - 1));
-                if (!this.answers.includes(index)) this.answers.push(index);
+                if (!this.answers.includes(index) && this.answerIndex !== index) this.answers.push(index);
             }
 
-            // 正解の作成
+            // 正解の配列への追加
             this.answers.push(this.answerIndex);
-
-            // 配列の簡易的なシャッフル
-            let rand = Math.round(Math.random() * 3);
-            this.answers.last = this.answers[rand];
-            this.answers[rand] = this.answerIndex;
+            let rand = Math.round(Math.random() * 2);
+            let tmp = this.answers[3];
+            this.answers[3] = this.answers[rand];
+            this.answers[rand] = tmp;
 
             // 回答をdomに反映
             let answers = 1;
