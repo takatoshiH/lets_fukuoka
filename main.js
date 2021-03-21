@@ -134,7 +134,7 @@ let app = new Vue({
             document.getElementById('popup_title').innerText = judge ? '正解！' : '不正解!';
 
             // 間違った場合に正解を表示する
-            document.getElementById('municipality_content').innerText = judge ? `正解は${this.municipality['name']}` : '';
+            document.getElementById('municipality_content').innerText = judge ? '':  `正解は${this.municipality['name']}`;
 
             document.getElementById('municipality_url').setAttribute('href', this.municipality['url']);
 
