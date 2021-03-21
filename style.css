@@ -1,6 +1,10 @@
+body {
+    background-color: azure;
+}
 .title {
     text-align: center;
-    color: #0b0d3d;
+    color: black;
+    font-family: "Hiragino Kaku Gothic Pro";
 }
 
 .roulette {
