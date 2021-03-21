@@ -96,10 +96,7 @@ let app = new Vue({
             this.rouletteActive = false;
             this.waitingAnswer = true;
 
-            //タイマーの停止
             clearTimeout(this.intervalId);
-
-            // 回答の作成
             this.createAnswers();
 
         },
@@ -137,11 +134,7 @@ let app = new Vue({
             document.getElementById('popup_title').innerText = judge ? '正解！' : '不正解!';
 
             // 間違った場合に正解を表示する
-            if (!judge) {
-                document.getElementById('municipality_content').innerText = `正解は${this.municipality['name']}`;
-            } else {
-                document.getElementById('municipality_content').innerText = '';
-            }
+            document.getElementById('municipality_content').innerText = judge ? `正解は${this.municipality['name']}` : '';
 
             document.getElementById('municipality_url').setAttribute('href', this.municipality['url']);
 
@@ -180,9 +173,7 @@ let app = new Vue({
 
             for (let index of this.answers) {
                 document.getElementById(`answer_${answers}`).innerText = municipalities[index]['name'];
-                if (this.answerIndex === index) {
-                    document.getElementById(`answer_${answers}`).setAttribute('answer', 'correct');
-                }
+                if (this.answerIndex === index) document.getElementById(`answer_${answers}`).setAttribute('answer', 'correct');
                 answers++;
             }
         },
