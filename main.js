@@ -135,8 +135,15 @@ let app = new Vue({
 
             // 正誤を画面に表示
             document.getElementById('popup_title').innerText = judge ? '正解！' : '不正解!';
+
+            // 間違った場合に正解を表示する
+            if (!judge) {
+                document.getElementById('municipality_content').innerText = `正解は${this.municipality['name']}`;
+            } else {
+                document.getElementById('municipality_content').innerText = '';
+            }
+
             document.getElementById('municipality_url').setAttribute('href', this.municipality['url']);
-            if (!judge) document.getElementById('municipality_content').innerText = `正解は${this.municipality['name']}`;
 
             // 正解属性の削除
             Array.from(document.getElementsByClassName('answer')).forEach(function (municipality) {
