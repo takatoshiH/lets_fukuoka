@@ -67,6 +67,13 @@ const municipalities = [
 
 let app = new Vue({
     el: '#app',
+      components: {
+        'opening-page': httpVueLoader('./components/pages/OpeningPage.vue'),
+        'maps': httpVueLoader('./components/maps/index.vue'),
+        'pop-up': httpVueLoader('./components/PopUp.vue'),
+        'roulette': httpVueLoader('./components/Roulette.vue'),
+        'answer-box': httpVueLoader('./components/AnswerBox.vue'),
+      },
     data: {
         readyToStart: true, // スタート前の状態
         rouletteActive: false, // ルーレットが回っているか
@@ -78,13 +85,13 @@ let app = new Vue({
         answers: [],
         isPlaying: false, //オープニング画面の表示
         siteTitle: "Let's Fukuoka",
+        correctCount: 0,
     },
     methods: {
         // Playボタンをクリック
-        moveToGame: function () {
+        moveToGame() {
             this.isPlaying = true;
         },
-
         // スタートボタンをクリック
         startRoulette: function () {
             if (!this.readyToStart) return;
@@ -94,7 +101,10 @@ let app = new Vue({
 
             // ルーレットの開始
             this.roulette();
-
+            setTimeout(() => {
+                this.stopRoulette()}
+                ,2000
+              )
         },
         // 停止ボタンをクリック
         stopRoulette: function () {
@@ -102,8 +112,8 @@ let app = new Vue({
 
             this.rouletteActive = false;
             this.waitingAnswer = true;
-
             clearTimeout(this.intervalId);
+
             this.createAnswers();
 
         },
@@ -137,8 +147,10 @@ let app = new Vue({
             // 回答の正誤判定
             const judge = event.target.hasAttribute('answer');
 
+            this.correctCount = judge? this.correctCount + 1 : 0 ;
+
             // 正誤を画面に表示
-            document.getElementById('popup_title').innerText = judge ? '正解！' : '不正解!';
+            document.getElementById('popup_title').innerText = judge ? '　正解！' : '不正解!';
 
             // 間違った場合に正解を表示する
             document.getElementById('municipality_content').innerText = judge ? '':  `正解は${this.municipality['name']}`;
