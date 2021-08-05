@@ -7,11 +7,12 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <link rel="icon" type="image/x-icon" href="icon.png">
  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
 <div id="app">
-	<div v-show="!isPlaying" class="">
-		<h1 class="">{{siteTitle}}</h1>
+	<div v-show="!isPlaying" class="bg-black h-screen w-screen">
+		<h1 class="white">{{siteTitle}}</h1>
 		<div class=""></div>
 	</div>
 	<div v-show="isPlaying">
