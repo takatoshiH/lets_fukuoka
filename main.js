@@ -76,8 +76,15 @@ let app = new Vue({
         intervalId: 0,
         municipality: municipalities[0],
         answers: [],
+        isPlaying: false, //オープニング画面の表示
+        siteTitle: "Let's Fukuoka",
     },
     methods: {
+        // Playボタンをクリック
+        moveToGame: function () {
+            this.isPlaying = true;
+        },
+
         // スタートボタンをクリック
         startRoulette: function () {
             if (!this.readyToStart) return;
