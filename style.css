@@ -24,8 +24,7 @@ body {
 
 .map {
     width: 100%;
-    max-width: 720px;
-    min-width: 100%;
+    max-width: 450px;
     height: 50vh;
     max-height: 500px;
     margin: 1em auto;
@@ -38,6 +37,7 @@ body {
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
+    height: 100%;
 }
 
 #start_btn {
